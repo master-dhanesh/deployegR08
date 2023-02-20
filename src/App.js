@@ -13,7 +13,7 @@ const App = () => {
     }, []);
 
     setInterval(() => {
-        // fetchbackend();
+        fetchbackend();
     }, 1000);
 
     return (
