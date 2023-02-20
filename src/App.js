@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+    const [backend, setBackend] = useState(null);
+    const fetchbackend = async () => {
+        const test = await fetch(`${process.env.REACT_APP_API_URL}/test`);
+        const json = await test.json();
+        setBackend(json);
+    };
+
+    useEffect(() => {
+        fetchbackend();
+    }, []);
+
+    setInterval(() => {
+        // fetchbackend();
+    }, 1000);
+
+    return (
+        <div>
+            <h1>This is Home page Component</h1>
+            <h3>{backend}</h3>
+        </div>
+    );
+};
 
 export default App;
